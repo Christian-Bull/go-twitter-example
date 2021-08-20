@@ -17,7 +17,7 @@ func main() {
 	var db *sql.DB
 	var err error
 
-	l := log.New(os.Stdout, "products-api ", log.LstdFlags)
+	l := log.New(os.Stdout, "tweets-api ", log.LstdFlags)
 
 	// open db and defer close until execute
 	db, err = sql.Open("sqlite3", os.Getenv("sqldatabase"))

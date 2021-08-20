@@ -25,6 +25,8 @@ func (t *Tweets) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		// sets return type as json
 		rw.Header().Set("Content-Type", "application/json")
+		rw.Header().Set("Access-Control-Allow-Origin", "*")
+		rw.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 		t.getTweets(rw, r)
 		return

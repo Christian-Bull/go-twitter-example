@@ -1,0 +1,19 @@
+version: "2"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - sqldatabase=src/tweets.db
+    ports: 
+      - "9090:9090"
+  web:
+    image: nginx
+    volumes:
+      - ./ui:/usr/share/nginx/html
+    ports:
+      - "8080:80"
+    environment:
+      - NGINX_PORT=80

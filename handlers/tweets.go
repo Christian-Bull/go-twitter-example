@@ -62,7 +62,10 @@ func (t *Tweets) createTweet(rw http.ResponseWriter, r *http.Request) {
 		http.Error(rw, "Error unmarshalling json", http.StatusBadRequest)
 	}
 
-	data.CreateTweet(d, t.db)
+	err = data.CreateTweet(d, t.db, t.l)
+	if err != nil {
+		http.Error(rw, "Error creating tweet", http.StatusInternalServerError)
+	}
 
 	// set response header
 	rw.WriteHeader(http.StatusCreated)

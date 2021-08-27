@@ -31,7 +31,7 @@ func (t *Tweet) FromJSON(r io.Reader) error {
 }
 
 // adds a new tweet to our collection of tweets
-func CreateTweet(t *Tweet, db *sql.DB) {
+func CreateTweet(t *Tweet, db *sql.DB, l *log.Logger) error {
 
 	// generate the timestamp
 	t.CreatedOn = time.Now().UTC().String()
@@ -43,8 +43,9 @@ func CreateTweet(t *Tweet, db *sql.DB) {
 
 	_, err := db.Exec(querySql, t.Text, t.CreatedOn)
 	if err != nil {
-		log.Fatal(err)
+		l.Println("Error creating tweet: ", err)
 	}
+	return err
 }
 
 // GetTweets return tweets
